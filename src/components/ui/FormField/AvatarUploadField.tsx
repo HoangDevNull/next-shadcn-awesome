@@ -14,7 +14,6 @@ interface Props<T extends FieldValues = FieldValues>
   control: Control<T>;
   name: FieldPath<T>;
   defaultValue?: FieldPathValue<T, FieldPath<T>>;
-  fullWidth?: boolean;
   accept?: MIME_TYPE[];
 }
 
@@ -42,11 +41,11 @@ const AvatarUploadField = <T extends FieldValues>({
 
         return (
           <FormItem>
-            <div className=" relative w-fit">
-              <Avatar src={img} className={cn('border-6 border-neutral-30 h-40 w-40', className)} />
+            <div className="relative w-fit">
+              <Avatar src={img} className={cn('border-neutral-10 border-3 h-40 w-40', className)} />
               <button
                 type="button"
-                className="border-neutral-30 bg-neutral-0 absolute bottom-0 left-1/2 flex h-12 w-12 -translate-x-1/2 items-center justify-center rounded-full border-2"
+                className="border-neutral-10 bg-neutral-0 absolute bottom-0 left-1/2 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full border-2"
                 onClick={() => ref.current?.click()}
               >
                 <Icons.camera />

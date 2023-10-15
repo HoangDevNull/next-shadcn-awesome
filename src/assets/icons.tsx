@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
-import { ChevronLeft, ChevronRight, Copy, HelpCircle, Loader2, LogOut, User } from 'lucide-react';
+import { Camera, ChevronLeft, ChevronRight, Copy, HelpCircle, Loader2, LogOut, User } from 'lucide-react';
 
 import angleDown from '@/assets/svg/angle-down-solid.svg';
 import arrowDown from '@/assets/svg/arrow-down.svg';
@@ -7,7 +7,6 @@ import arrowLeft from '@/assets/svg/arrow-left.svg';
 import bell from '@/assets/svg/bell.svg';
 import bookmark from '@/assets/svg/bookmark.svg';
 import calendar from '@/assets/svg/calendar.svg';
-import camera from '@/assets/svg/camera.svg';
 import check from '@/assets/svg/check.svg';
 import checkCircle from '@/assets/svg/check-circle.svg';
 import checkCircleXs from '@/assets/svg/check-circle-xs.svg';
@@ -61,7 +60,7 @@ const IconList = {
   facebookCircle,
   twitter,
   eye,
-  camera,
+  camera: Camera,
   link,
   bookmark,
   search,

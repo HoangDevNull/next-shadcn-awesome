@@ -5,6 +5,7 @@ import { AutoComplete } from '@/components/ui/autocomplete';
 import { Button } from '@/components/ui/button';
 import { FormWrapper } from '@/components/ui/form';
 import {
+  AvatarUploadField,
   DatePickerField,
   SelectField,
   SelectWithSearchField,
@@ -19,6 +20,7 @@ const Form = () => {
   return (
     <div className="container py-12">
       <FormWrapper form={form} formId="test" onSubmit={console.log}>
+        <AvatarUploadField control={form.control} name="avatar" />
         <VStack>
           <TextField control={form.control} name="email" fullWidth label="Email" />
           <TextField control={form.control} name="password" fullWidth label="Password" type="password" />
