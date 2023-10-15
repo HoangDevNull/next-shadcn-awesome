@@ -5,10 +5,10 @@ import type { Control, FieldPath, FieldPathValue, FieldValues } from 'react-hook
 
 import { cn } from '@/lib/utils';
 
-import { FormControl, FormField, FormItem, FormMessage } from '../form';
-import { floatLabelVariants } from '../label';
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../form';
 import type { selectTriggerVariants } from '../select';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../select';
+import { Show } from '../Utilities';
 
 interface IData {
   label: string;
@@ -26,6 +26,7 @@ interface Props<T extends FieldValues = FieldValues>
   label?: ReactNode;
   required?: boolean;
   fullWidth?: boolean;
+  labelClassName?: string;
   data: IData[];
 }
 
@@ -40,6 +41,7 @@ const SelectField = <T extends FieldValues>({
   inputSize,
   fullWidth,
   className,
+  labelClassName,
   ...props
 }: Props<T>) => {
   return (
@@ -54,22 +56,21 @@ const SelectField = <T extends FieldValues>({
               <Select onValueChange={field.onChange} value={field.value} disabled={props.disabled}>
                 <FormControl>
                   <div>
+                    <Show when={!!label}>
+                      <FormLabel className={labelClassName}>
+                        {label} {required && <span className="text-red-500">*</span>}
+                      </FormLabel>
+                    </Show>
                     <SelectTrigger
                       variant={variant}
                       inputSize={inputSize}
-                      className={cn(className, 'pl-4', { 'w-full': fullWidth }, field.value ? 'pt-7' : '')}
+                      className={cn(className, { 'w-full': fullWidth })}
                     >
                       <SelectValue />
                     </SelectTrigger>
                   </div>
                 </FormControl>
-                <label
-                  className={cn(
-                    floatLabelVariants({ variant: field.value ? 'selectActive' : 'selectInActive', select: 'active' })
-                  )}
-                >
-                  {label}
-                </label>
+
                 <SelectContent>
                   {data.map((x) => (
                     <SelectItem key={x.value} value={x.value}>

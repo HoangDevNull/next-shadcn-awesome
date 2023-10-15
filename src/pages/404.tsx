@@ -9,7 +9,7 @@ export default function Custom404() {
     <section>
       <div className="container mx-auto flex min-h-[50vh] items-center justify-center px-6 py-12">
         <div>
-          <p className="text-main-100 text-sm font-medium">404 error</p>
+          <p className="text-main text-sm font-medium">404 error</p>
           <h1 className="mt-3 text-2xl font-semibold md:text-3xl">We can’t find that page</h1>
           <p className="mt-4 text-gray-500 dark:text-gray-400">
             Sorry, the page you are looking for doesn&apos;t exist or has been moved.
@@ -36,7 +36,7 @@ export default function Custom404() {
 
             <Link
               href={ROUTE.HOME}
-              className="bg-main-100 w-1/2 shrink-0  rounded-lg px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 sm:w-auto"
+              className="bg-main w-1/2 shrink-0  rounded-lg px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 sm:w-auto"
             >
               Take me home
             </Link>

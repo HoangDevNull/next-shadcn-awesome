@@ -30,17 +30,17 @@ const SelectWithSearch = forwardRef<HTMLInputElement, SelectWithSearchProps>(
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <div className="relative">
+            <Label className="mb-1.5 block">{label}</Label>
             <Input
               onChange={() => null}
               label={value ? ' ' : undefined}
               value={value}
               inputSize={inputSize}
               {...props}
-              className={cn(className, inputSize === 'sm' ? 'pt-5' : 'pt-2')}
+              className={cn(className)}
               ref={ref}
               suffix={<Icons.arrowDown />}
             />
-            <Label>{label}</Label>
           </div>
         </PopoverTrigger>
         <PopoverContent align="start" className="w-[var(--radix-popper-anchor-width)]">

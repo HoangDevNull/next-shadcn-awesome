@@ -1,6 +1,6 @@
 {
-  "name": "the-hashgraph-association-client-1.0",
-  "version": "0.1.0",
+  "name": "next-stack",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "dev": "yarn clean && next dev",

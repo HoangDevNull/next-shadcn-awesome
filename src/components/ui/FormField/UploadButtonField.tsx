@@ -62,7 +62,7 @@ const UploadButtonField = <T extends FieldValues>({
                     </p>
                     {!readonly && (
                       <Button onClick={() => onChange(undefined)} size="mixin" variant="ghost">
-                        <Icons.reload className="text-main-100" />
+                        <Icons.reload className="text-main" />
                       </Button>
                     )}
                   </HStack>

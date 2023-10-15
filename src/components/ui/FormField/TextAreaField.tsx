@@ -2,9 +2,10 @@ import type { ReactNode } from 'react';
 import React from 'react';
 import type { Control, FieldPath, FieldPathValue, FieldValues } from 'react-hook-form';
 
-import { FormControl, FormField, FormItem, FormMessage } from '../form';
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../form';
 import type { TextAreaProps } from '../textarea';
 import { TextArea } from '../textarea';
+import { Show } from '../Utilities';
 
 interface Props<T extends FieldValues = FieldValues> extends TextAreaProps {
   control: Control<T>;
@@ -12,9 +13,17 @@ interface Props<T extends FieldValues = FieldValues> extends TextAreaProps {
   defaultValue?: FieldPathValue<T, FieldPath<T>>;
   label?: ReactNode;
   required?: boolean;
+  labelClassName?: string;
 }
 
-const TextAreaField = <T extends FieldValues>({ defaultValue, control, label, required, ...props }: Props<T>) => {
+const TextAreaField = <T extends FieldValues>({
+  defaultValue,
+  labelClassName,
+  control,
+  label,
+  required,
+  ...props
+}: Props<T>) => {
   return (
     <FormField
       control={control}
@@ -23,8 +32,13 @@ const TextAreaField = <T extends FieldValues>({ defaultValue, control, label, re
       render={({ field }) => (
         <FormItem>
           <FormControl>
-            <div className="relative">
-              <TextArea label={label} {...field} {...props} />
+            <div>
+              <Show when={!!label}>
+                <FormLabel className={labelClassName}>
+                  {label} {required && <span className="text-red-500">*</span>}
+                </FormLabel>
+              </Show>
+              <TextArea {...field} {...props} />
             </div>
           </FormControl>
           <FormMessage className="mt-1 text-xs" />

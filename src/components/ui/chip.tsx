@@ -8,12 +8,12 @@ const chipVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-main-10 text-main-100 hover:bg-main-100/20',
+        default: 'bg-main-10 text-main hover:bg-main/20',
         success: 'border-transparent bg-success-light text-success hover:bg-success/50',
         error: 'border-transparent bg-error-light text-error hover:bg-error/50',
         warning: 'border-transparent bg-warning-light text-warning hover:bg-warning/50',
         info: 'border-transparent bg-info-light text-info hover:bg-info/50',
-        outline: 'border-main-100 font-medium text-info hover:bg-info/50',
+        outline: 'border-main font-medium text-info hover:bg-info/50',
       },
       rounded: {
         default: 'rounded-full',

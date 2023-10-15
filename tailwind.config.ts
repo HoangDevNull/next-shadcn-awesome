@@ -6,6 +6,9 @@ module.exports = {
   darkMode: ['class'],
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    container: {
+      center: true,
+    },
     extend: {
       fontSize: {
         xxs: '0.625rem',
@@ -43,16 +46,12 @@ module.exports = {
       colors: {
         border: {
           DEFAULT: 'hsl(var(--border))',
-          alert: 'hsl(var(--alert-border))',
         },
-        alert: 'hsl(var(--alert-text))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         surface: 'hsl(var(--surface))',
         background: {
           DEFAULT: 'hsl(var(--background))',
-          section: 'hsl(var(--section))',
-          alert: 'hsl(var(--alert))',
         },
         foreground: 'hsl(var(--foreground))',
         primary: {
@@ -110,6 +109,7 @@ module.exports = {
           '60': '#212121',
         },
         main: {
+          DEFAULT: '#133C65',
           '0': '#ECF0F4',
           '10': '#DBE4ED',
           '20': '#DBE4ED',
@@ -124,13 +124,12 @@ module.exports = {
         },
       },
       borderRadius: {
-        '3xl': 'calc(var(--radius) * 4.5)',
-        '2xl': 'calc(var(--radius) * 3)',
-        xl: 'calc(var(--radius) * 2)',
-        lg: 'var(--radius)',
-        12: 'calc(var(--radius) + 4px)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
+        '3xl': '36px',
+        '2xl': '24px',
+        xl: '16px',
+        lg: '12px',
+        md: '8px',
+        sm: '4px',
         haft: '50%',
       },
       boxShadow: {

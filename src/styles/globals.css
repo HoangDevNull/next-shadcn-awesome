@@ -4,47 +4,33 @@
 
 @layer base {
   :root {
-    --background: 0, 0%, 98%;
-    --foreground: 210 11% 15%;
-
-    --section: 245 100% 95%;
-    --alert: 153 31% 86%;
-    --alert-border: 153 31% 73%;
-    --alert-text: 152 69% 25%;
-
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-
-    --popover: 0, 0%, 98%;
-    --popover-foreground: 0, 0%, 4%;
-
-    --card: 0, 0%, 98%;
-    --card-foreground: 0, 0%, 4%;
-
-    --border: 0, 0%, 91%;
-    --input: 0, 0%, 71%;
-
-    --primary: 213 83% 55%;
+    --background: 0, 0%, 100%;
+    --foreground: 240, 10%, 3.9%;
+    --card: 0, 0%, 100%;
+    --card-foreground: 240, 10%, 3.9%;
+    --popover: 0, 0%, 100%;
+    --popover-foreground: 240, 10%, 3.9%;
+    --primary: 240, 5.9%, 10%;
     --primary-foreground: 0, 0%, 98%;
-
-    --secondary: 213 83% 55%;
-    --secondary-foreground: 240 5.9% 10%;
-
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-
-    --destructive: 14, 100%, 56%;
+    --secondary: 240, 4.8%, 95.9%;
+    --secondary-foreground: 240, 5.9%, 10%;
+    --muted: 240, 4.8%, 95.9%;
+    --muted-foreground: 240, 3.8%, 46.1%;
+    --accent: 240, 4.8%, 95.9%;
+    --accent-foreground: 240, 5.9%, 10%;
+    --destructive: 0, 84.2%, 60.2%;
     --destructive-foreground: 0, 0%, 98%;
-
-    --ring: 221.2 83.2% 53.3%;
-
-    /* Custom token */
-
+    --border: 240, 5.9%, 90%;
+    --input: 240, 5.9%, 90%;
+    --ring: 240, 5.9%, 10%;
     --radius: 0.5rem;
+
+    /* CUSTOM TOKEN */
+
     --header-h: 6.375rem;
 
-    --success: 165 100% 37%;
-    --success-light: 166 58% 90%;
+    --success: 165, 100%, 37%;
+    --success-light: 166, 58%, 90%;
 
     --error: 14, 100%, 56%;
     --error-light: 15, 100%, 93%;
@@ -55,40 +41,29 @@
     --info: 225, 98%, 35%;
     --info-light: 227, 56%, 94%;
 
-    --divider: 240 85% 90%;
-
-    --dashboard-container: 1280px;
+    --divider: 240, 85%, 90%;
   }
 
   .dark {
-    --background: 210 17% 5%;
+    --background: 240, 10%, 3.9%;
     --foreground: 0, 0%, 98%;
-
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 0 0% 88%;
-
-    --popover: 210 17% 5%;
-    --popover-foreground: 0, 0%, 98%;
-
-    --card: 210 17% 5%;
+    --card: 240, 10%, 3.9%;
     --card-foreground: 0, 0%, 98%;
-
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-
+    --popover: 240, 10%, 3.9%;
+    --popover-foreground: 0, 0%, 98%;
     --primary: 0, 0%, 98%;
-    --primary-foreground: 240 5.9% 10%;
-
-    --secondary: 240 3.7% 15.9%;
+    --primary-foreground: 240, 5.9%, 10%;
+    --secondary: 240, 3.7%, 15.9%;
     --secondary-foreground: 0, 0%, 98%;
-
-    --accent: 240 3.7% 15.9%;
+    --muted: 240, 3.7%, 15.9%;
+    --muted-foreground: 240, 5%, 64.9%;
+    --accent: 240, 3.7%, 15.9%;
     --accent-foreground: 0, 0%, 98%;
-
-    --destructive: 14, 100%, 56%;
-    --destructive-foreground: 0 85.7% 97.3%;
-
-    --ring: 224.3 76.3% 48%;
+    --destructive: 0, 62.8%, 30.6%;
+    --destructive-foreground: 0, 0%, 98%;
+    --border: 240, 3.7%, 15.9%;
+    --input: 240, 3.7%, 15.9%;
+    --ring: 240, 4.9%, 83.9%;
   }
 }
 
@@ -107,7 +82,4 @@
 }
 
 @layer components {
-  .bg-hero-landing {
-    background: #385889 linear-gradient(#2d84eb 0%, #8259ef 100%) repeat scroll 0% 0%;
-  }
 }

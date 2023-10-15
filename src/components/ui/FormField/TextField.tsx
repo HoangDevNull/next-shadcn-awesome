@@ -11,13 +11,13 @@ interface Props<T extends FieldValues = FieldValues> extends InputProps {
   name: FieldPath<T>;
   defaultValue?: FieldPathValue<T, FieldPath<T>>;
   label?: string;
-  classNameLabel?: string;
+  labelClassName?: string;
   required?: boolean;
 }
 
 const TextField = <T extends FieldValues>({
   className,
-  classNameLabel,
+  labelClassName,
   control,
   defaultValue,
   label,
@@ -34,20 +34,12 @@ const TextField = <T extends FieldValues>({
         <FormItem>
           <FormControl>
             <div>
-              <Show when={variant !== 'floating'}>
-                {label && (
-                  <div className="mb-2 flex items-center">
-                    <FormLabel className={classNameLabel}>
-                      {label} {required && <span className="text-red-500">*</span>}
-                    </FormLabel>
-                  </div>
-                )}
-                <Input {...field} {...props} className={className} />
+              <Show when={!!label}>
+                <FormLabel className={labelClassName}>
+                  {label} {required && <span className="text-red-500">*</span>}
+                </FormLabel>
               </Show>
-              <Show when={variant === 'floating'}>
-                <Input variant={variant} label={label} {...field} {...props} className={className} />
-              </Show>
-
+              <Input {...field} {...props} className={className} />
               <FormMessage className="mt-1 text-xs" />
             </div>
           </FormControl>

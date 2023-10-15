@@ -86,7 +86,7 @@ const NavigationMenuLink = React.forwardRef<
     <NavigationMenuPrimitive.Link
       href={href}
       className={cn(className, 'h-full leading-[50px]', {
-        'hover:text-main-100 after:bg-primary after:w-full': isActive,
+        'hover:text-main after:bg-primary after:w-full': isActive,
       })}
       ref={ref}
       {...props}

@@ -25,6 +25,7 @@ const vStackVariants = cva('flex flex-col', {
     spacing: {
       0: 'gap-0',
       4: 'gap-1',
+      6: 'gap-1.5',
       8: 'gap-2',
       12: 'gap-3',
       16: 'gap-4',

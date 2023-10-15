@@ -16,13 +16,13 @@ interface CheckboxProps<T extends FieldValues = FieldValues> {
   label?: ReactNode;
   required?: boolean;
   className?: string;
-  classNameLabel?: string;
+  labelClassName?: string;
 }
 
 const CheckboxField = <T extends FieldValues>({
   control,
   className,
-  classNameLabel,
+  labelClassName,
   name,
   label,
   required,
@@ -42,7 +42,7 @@ const CheckboxField = <T extends FieldValues>({
             {label && (
               <Label
                 htmlFor={id}
-                className={cn('cursor-pointer text-xs font-normal leading-none lg:text-sm', classNameLabel)}
+                className={cn('cursor-pointer text-xs font-normal leading-none lg:text-sm', labelClassName)}
               >
                 {label}
                 {required && <span className="text-red-500">*</span>}

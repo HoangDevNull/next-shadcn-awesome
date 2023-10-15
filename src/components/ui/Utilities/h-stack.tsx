@@ -14,6 +14,13 @@ const hStackVariants = cva('flex flex-wrap items-center', {
       around: 'justify-around',
       evenly: 'justify-evenly',
     },
+    align: {
+      default: 'items-stretch',
+      center: 'items-center items',
+      start: 'items-start',
+      end: 'items-end',
+      baseline: 'items-baseline',
+    },
     spacing: {
       0: 'gap-0',
       4: 'gap-1',
@@ -23,6 +30,7 @@ const hStackVariants = cva('flex flex-wrap items-center', {
       20: 'gap-5',
       24: 'gap-6',
       32: 'gap-8',
+      48: 'gap-12',
     },
   },
   defaultVariants: {
@@ -37,10 +45,14 @@ export interface HStackProps extends React.HTMLAttributes<HTMLDivElement>, Varia
 }
 
 const HStack = React.forwardRef<HTMLDivElement, HStackProps>(
-  ({ className, asChild = false, noWrap, pos, spacing, children, ...props }, ref) => {
+  ({ className, asChild = false, noWrap, pos, align, spacing, children, ...props }, ref) => {
     const Comp = asChild ? Slot : 'div';
     return (
-      <Comp className={cn(hStackVariants({ spacing, className, pos }), { 'flex-nowrap': noWrap })} ref={ref} {...props}>
+      <Comp
+        className={cn(hStackVariants({ spacing, align, className, pos }), { 'flex-nowrap': noWrap })}
+        ref={ref}
+        {...props}
+      >
         {children}
       </Comp>
     );

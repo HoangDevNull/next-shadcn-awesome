@@ -11,14 +11,14 @@ import { Show } from './Utilities';
 export const inputVariants = cva(
   cn(
     'border-input border placeholder:font-light bg-transparent ring-offset-background peer',
-    'focus-visible:ring-transparent focus-visible:border-main-100 flex w-full file:border-0 file:bg-transparent',
-    'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50',
-    'read-only:bg-readonly read-only:border-readonly-border read-only:cursor-default'
+    'focus-visible:ring-transparent focus-visible:border-main flex w-full file:border-0 file:bg-transparent',
+    'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50'
+    // 'read-only:bg-readonly read-only:border-readonly-border read-only:cursor-default'
   ),
   {
     variants: {
       variant: {
-        default: '',
+        default: 'bg-background',
         filled: 'bg-background',
       },
       inputSize: {

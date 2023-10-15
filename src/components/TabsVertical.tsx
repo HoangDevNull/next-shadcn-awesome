@@ -21,7 +21,7 @@ const TabsVertical = <T extends string | number>({ data, className, onChange, va
             <li
               onClick={() => onChange(tab.value)}
               className={cn('text-neutral-30 relative cursor-pointer px-6 py-4 text-xl', {
-                'text-main-100 bg-main-10': value === tab.value,
+                'text-main bg-main-10': value === tab.value,
               })}
               key={i}
             >
@@ -29,7 +29,7 @@ const TabsVertical = <T extends string | number>({ data, className, onChange, va
               {value === tab.value ? (
                 <motion.div
                   layoutId={id}
-                  className="bg-main-100 absolute bottom-0 left-0 z-10 h-full w-[5px]"
+                  className="bg-main absolute bottom-0 left-0 z-10 h-full w-[5px]"
                   transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                 />
               ) : null}

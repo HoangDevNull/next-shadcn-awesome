@@ -7,10 +7,11 @@ import { Icons } from '@/assets/icons';
 
 import type { CalendarProps } from '../calendar';
 import { Calendar } from '../calendar';
-import { FormControl, FormField, FormItem, FormMessage } from '../form';
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../form';
 import type { InputProps } from '../input';
 import { Input } from '../input';
 import { Popover, PopoverContent, PopoverTrigger } from '../popover';
+import { Show } from '../Utilities';
 
 interface Props<T extends FieldValues = FieldValues> extends InputProps {
   control: Control<T>;
@@ -18,6 +19,7 @@ interface Props<T extends FieldValues = FieldValues> extends InputProps {
   defaultValue?: FieldPathValue<T, FieldPath<T>>;
   label?: ReactNode;
   calendarProps?: CalendarProps;
+  labelClassName?: string;
 }
 
 const DatePickerField = <T extends FieldValues>({
@@ -27,6 +29,7 @@ const DatePickerField = <T extends FieldValues>({
   required,
   className,
   calendarProps,
+  labelClassName,
   ...props
 }: Props<T>) => {
   return (
@@ -38,13 +41,21 @@ const DatePickerField = <T extends FieldValues>({
           <Popover modal>
             <PopoverTrigger asChild>
               <FormControl>
-                <Input
-                  value={field.value ? dayjs(field.value).format('MMM DD, YYYY') : ''}
-                  onChange={() => null}
-                  label={label}
-                  suffix={<Icons.calendar />}
-                  {...props}
-                />
+                <div>
+                  <Show when={!!label}>
+                    <FormLabel className={labelClassName}>
+                      {label} {required && <span className="text-red-500">*</span>}
+                    </FormLabel>
+                  </Show>
+                  <Input
+                    value={field.value ? dayjs(field.value).format('MMM DD, YYYY') : ''}
+                    label={label}
+                    onChange={() => null}
+                    suffix={<Icons.calendar />}
+                    {...props}
+                  />
+                  <FormMessage className="mt-1 text-xs" />
+                </div>
               </FormControl>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
@@ -57,7 +68,6 @@ const DatePickerField = <T extends FieldValues>({
               />
             </PopoverContent>
           </Popover>
-          <FormMessage className="mt-1 text-xs" />
         </FormItem>
       )}
     />
