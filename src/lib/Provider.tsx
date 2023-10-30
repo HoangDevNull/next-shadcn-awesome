@@ -2,7 +2,7 @@ import type { DefaultOptions } from '@tanstack/react-query';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import React, { memo } from 'react';
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from 'sonner';
 
 import { ThemeProvider } from '@/components/ThemeProvider';
 import type { FCC } from '@/types';
@@ -29,20 +29,7 @@ const Provider: FCC<Props> = ({ children }) => {
           <ReactQueryDevtools />
         </QueryClientProvider>
       </ThemeProvider>
-      <Toaster
-        toastOptions={{
-          position: 'bottom-right',
-          success: {
-            className: 'border border-green-300 !bg-background text-sm !items-baseline rounded-md',
-          },
-          error: {
-            className: 'border border-red-300 !bg-background text-sm !items-baseline rounded-md',
-          },
-        }}
-        containerStyle={{
-          zIndex: 99999999,
-        }}
-      />
+      <Toaster />
     </>
   );
 };

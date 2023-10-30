@@ -36,6 +36,11 @@ export interface IOption<T extends any = any> {
   value: T;
 }
 
+export interface ISelectOption<T extends any = any> {
+  label: string;
+  value: T;
+}
+
 export interface IdType {
   id: any;
 }

@@ -21,13 +21,13 @@ const onRefreshToken = async () => {
       store.setAccessToken(accessToken);
       return accessToken;
     } catch (e) {
-      Router.replace(ROUTE.SIGN_IN);
+      Router.replace(ROUTE.HOME);
       store.logout();
     }
   } else {
-    if (Router.pathname !== ROUTE.SIGN_IN) {
+    if (Router.pathname !== ROUTE.HOME) {
       // toast.error('Your session is expired, please try to login again');
-      Router.replace(ROUTE.SIGN_IN);
+      Router.replace(ROUTE.HOME);
     }
     store.logout();
   }

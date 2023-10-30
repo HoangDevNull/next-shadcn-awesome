@@ -1,7 +1,7 @@
-import dayjs from 'dayjs';
 import * as React from 'react';
 import { DayPicker } from 'react-day-picker';
 
+import { isPastDate } from '@/lib/common';
 import { cn } from '@/lib/utils';
 
 import { Icons } from '../../assets/icons';
@@ -15,7 +15,9 @@ function Calendar({
   className,
   classNames,
   showOutsideDays = true,
-  disablePast = true,
+  onNextClick,
+  onPrevClick,
+  disablePast,
   ...props
 }: CalendarProps): JSX.Element {
   return (
@@ -48,7 +50,7 @@ function Calendar({
         day_hidden: 'invisible',
         ...classNames,
       }}
-      disabled={disablePast ? (date) => dayjs(date).date() < dayjs(new Date()).date() : false}
+      disabled={disablePast ? isPastDate : props.disabled}
       components={{
         IconLeft: () => <Icons.chevronLeft className="h-4 w-4" />,
         IconRight: () => <Icons.chevronRight className="h-4 w-4" />,

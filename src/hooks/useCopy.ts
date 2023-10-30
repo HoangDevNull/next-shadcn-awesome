@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { toast } from 'react-hot-toast';
+import { toast } from 'sonner';
 
 type CopyFn = (text?: string) => void; // Return success
 

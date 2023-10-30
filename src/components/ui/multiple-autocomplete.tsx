@@ -1,103 +1,97 @@
-/* eslint-disable no-extra-boolean-cast */
-
-'use client';
-
 import { Command as CommandPrimitive } from 'cmdk';
 import { Check } from 'lucide-react';
 import { type KeyboardEvent, useCallback, useRef, useState } from 'react';
 
 import { Icons } from '@/assets/icons';
+import type { CommandInputProps } from '@/components/ui/command';
 import { CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
+import { HStack, Show, VStack } from '@/components/ui/Utilities';
 import usePopover from '@/hooks/usePopover';
 import { cn } from '@/lib/utils';
+import type { FCC } from '@/types';
 
-import { Label } from './label';
+import { Chip } from './chip';
 import { Skeleton } from './skeleton';
-import { HStack, Show, VStack } from './Utilities';
 
 type Option = {
   value: string;
   label: string;
 };
-type AutoCompleteProps = {
-  options: Option[];
-  value?: Option;
-  onValueChange?: (value: Option) => void;
-  onInputChange?: (value: string) => void;
-  isLoading?: boolean;
-  disabled?: boolean;
-  placeholder?: string;
-  suffix?: any;
-  label: string;
-  name?: string;
-  className?: string;
-};
 
-export const AutoComplete = ({
-  options,
-  placeholder,
-  value,
-  onValueChange,
-  disabled,
-  isLoading = false,
-  suffix,
+interface Props extends CommandInputProps {
+  values?: string[];
+  onInputChange?: (val: string) => void;
+  onChange?: (val: string[]) => void;
+  onEnter?: (val: string[]) => void;
+  label?: any;
+  isLoading?: boolean;
+  options?: Option[];
+}
+
+const MultipleAutoComplete: FCC<Props> = ({
+  children,
+  onEnter,
+  options = [],
+  isLoading,
+  onChange,
   label,
+  values,
   onInputChange,
   ...props
-}: AutoCompleteProps) => {
+}) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const [inputValue, setInputValue] = useState('');
+  const [selected, setSelected] = useState<string[]>(values ?? []);
+
   const [isOpen, floatingStyles, refs, { open, close }] = usePopover();
 
-  const [selected, setSelected] = useState<Option>(value as Option);
-  const [inputValue, setInputValue] = useState<string>(value?.value || '');
+  const appendValue = useCallback(
+    (val: string) => {
+      if (selected.includes(val)) {
+        setInputValue('');
+        return selected;
+      }
+      const newSelected = [...selected, val];
+      setSelected(newSelected);
+      onChange?.(newSelected);
+      setInputValue('');
+      return newSelected;
+    },
+    [onChange, selected]
+  );
+
+  const removeValue = useCallback(
+    (val: string) => {
+      const newSelected = selected.filter((x) => x !== val);
+      setSelected(newSelected);
+      onChange?.(newSelected);
+      return newSelected;
+    },
+    [onChange, selected]
+  );
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent<HTMLDivElement>) => {
       const input = inputRef.current;
-      if (!input) {
-        return;
-      }
+      if (!input) return;
 
       // Keep the options displayed when the user is typing
       if (!isOpen) {
         open();
       }
 
-      // This is not a default behaviour of the <input /> field
+      // This is not a default behavior of the <input /> field
       if (event.key === 'Enter' && input.value !== '') {
-        const optionToSelect = options.find((option) => option.label === input.value);
-        if (optionToSelect) {
-          setSelected(optionToSelect);
-          onValueChange?.(optionToSelect);
-        }
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+        const updateValues = appendValue(input.value);
+        onEnter?.(updateValues);
       }
 
       if (event.key === 'Escape') {
         input.blur();
       }
     },
-    [isOpen, open, options, onValueChange]
-  );
-
-  const handleBlur = useCallback(() => {
-    close();
-    setInputValue(selected?.label ?? inputValue);
-  }, [close, inputValue, selected?.label]);
-
-  const handleSelectOption = useCallback(
-    (selectedOption: Option) => {
-      setInputValue(selectedOption.label);
-
-      setSelected(selectedOption);
-      onValueChange?.(selectedOption);
-
-      // This is a hack to prevent the input from being focused after the user selects an option
-      // We can call this hack: "The next tick"
-      setTimeout(() => {
-        inputRef?.current?.blur();
-      }, 0);
-    },
-    [onValueChange]
+    [isOpen, open, appendValue, onEnter]
   );
 
   const handleChange = (val: string) => {
@@ -105,23 +99,43 @@ export const AutoComplete = ({
     setInputValue(val);
   };
 
+  const hasValues = selected.length !== 0;
+
   return (
     <CommandPrimitive onKeyDown={handleKeyDown}>
-      <div ref={refs.setReference} className="relative">
-        <Label className="mb-1.5 block">{label}</Label>
-        <CommandInput
-          ref={inputRef}
-          value={inputValue}
-          onValueChange={handleChange}
-          onBlur={handleBlur}
-          onFocus={open}
-          placeholder={placeholder}
-          disabled={disabled}
-          icon={<></>}
-          wrapperClassName="border-input rounded-sm ring-offset-background peer border h-14 px-3 text-sm rounded-sm bg-transparent placeholder:font-light"
-          {...props}
-        />
-        <div className="absolute right-[10px] top-1/2 -translate-y-1/2">{suffix || <Icons.arrowDown />}</div>
+      <div className="mx-auto">
+        <div
+          ref={refs.setReference}
+          className={cn(
+            'border-input hover:border-main ring-offset-background peer relative flex flex-wrap items-center gap-2 rounded-sm border bg-transparent px-3  text-sm placeholder:font-light',
+            hasValues ? 'min-h-14 py-3' : 'h-14'
+          )}
+        >
+          {hasValues && <label className="text-sub-1 -mt-4 mr-2 text-sm">{label}</label>}
+
+          {selected.map((x, i) => (
+            <Chip key={i}>
+              {x}
+              <Icons.X
+                onClick={() => removeValue(x)}
+                className="text-main-30 hover:text-main ml-2 h-3 w-3 cursor-pointer"
+              />
+            </Chip>
+          ))}
+
+          <CommandInput
+            ref={inputRef}
+            value={inputValue}
+            onValueChange={handleChange}
+            onBlur={close}
+            onFocus={open}
+            icon={<></>}
+            className="w-0 min-w-[30px] flex-1"
+            wrapperClassName="border-none px-0 h-8 flex-1"
+            placeholder={selected.length === 0 ? label : 'Add more...'}
+            {...props}
+          />
+        </div>
       </div>
       <div className="relative mt-1">
         <div
@@ -145,7 +159,7 @@ export const AutoComplete = ({
 
             <CommandGroup>
               {(isLoading ? [] : options).map((option) => {
-                const isSelected = selected?.value === option.value;
+                const isSelected = selected.includes(option.value);
                 return (
                   <CommandItem
                     key={option.value}
@@ -154,7 +168,7 @@ export const AutoComplete = ({
                       event.preventDefault();
                       event.stopPropagation();
                     }}
-                    onSelect={() => handleSelectOption(option)}
+                    onSelect={() => (isSelected ? removeValue(option.value) : appendValue(option.value))}
                     className={cn('flex w-full items-center gap-2', !isSelected ? 'pl-8' : null)}
                   >
                     {isSelected ? <Check className="w-4" /> : null}
@@ -170,13 +184,13 @@ export const AutoComplete = ({
                     event.preventDefault();
                     event.stopPropagation();
                   }}
-                  onSelect={() => handleSelectOption({ label: inputValue, value: inputValue })}
+                  onSelect={() => appendValue(inputValue)}
                   className={cn('flex w-full items-center gap-2')}
                 >
-                  {inputValue === selected?.value ? (
-                    <Icons.check className="text-success w-4" />
+                  {selected.includes(inputValue) ? (
+                    <Icons.check className="text-success h-4 w-4" />
                   ) : (
-                    <Icons.plus className="text-success w-4" />
+                    <Icons.plus className="text-success h-4 w-4" />
                   )}
                   <HStack className="text-success">Suggest &quot;{inputValue}&quot;</HStack>
                 </CommandItem>
@@ -188,3 +202,5 @@ export const AutoComplete = ({
     </CommandPrimitive>
   );
 };
+
+export { MultipleAutoComplete };

@@ -1,5 +1,6 @@
+import { differenceInCalendarDays } from 'date-fns';
 import dayjs from 'dayjs';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 
 import { getMutateError } from './getMutateError';
 import { REGEX_EMOJI, REGEX_NO_SPECIAL_CHARACTERS } from './regex';
@@ -109,3 +110,7 @@ export const validateEmoji = (text: string): boolean => {
 export const validateCharacterSpecial = (text: string) => {
   return !REGEX_NO_SPECIAL_CHARACTERS.test(text);
 };
+
+export function isPastDate(date: Date) {
+  return differenceInCalendarDays(date, new Date()) < 0;
+}
